@@ -13,8 +13,8 @@ import java.sql.SQLException;
 public class UserDao {
     private JdbcTemplate jdbcTemplate;
 
-    private final static String MACTH_COUNT_SQL = "SELECT count(*) FROM " +
-            "t_user WHERE user_name =? and password=? ";
+    private final static String MACTH_COUNT_SQL = "SELECT * FROM " +
+            "t_user WHERE user_name = ? ";
 
     private final static String UPDATE_LOGIN_INFO_SQL = "UPDATE t_user SET last_visit=?" +
             ",last_ip=?,credits=? WHERE user_id=?";
@@ -25,7 +25,7 @@ public class UserDao {
     }
 
     public int getMatchCount(String userName, String password){
-        String sql = "SELECT coint(*) FROM t_user WHERE user_name =? and password=? ";
+        String sql = "SELECT count(*) FROM t_user WHERE user_name =? and password=? ";
 
         return jdbcTemplate.queryForInt(sql, new Object[] {userName, password});
     }
@@ -34,6 +34,7 @@ public class UserDao {
         final User user = new User();
         jdbcTemplate.query(MACTH_COUNT_SQL, new Object[]{userName}, new RowCallbackHandler() {
             public void processRow(ResultSet rs) throws SQLException {
+                //boolean is = rs.next();
                 user.setUserId(rs.getInt("user_id"));
                 user.setUserName(userName);
                 user.setCredits(rs.getInt("credits"));
