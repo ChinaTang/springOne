@@ -13,7 +13,7 @@ public class LoginLogDao {
             "t_login_log(user_id,ip,login_datetime) VALUES(?,?,?)";
 
     @Autowired
-    public LoginLogDao(JdbcTemplate jdbcTemplate){
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
 

@@ -1,25 +1,19 @@
-package service;
-
+package com.smart.service;
 
 import com.smart.domain.User;
-import com.smart.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.transaction.support.AbstractTransactionStatus;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-@ContextConfiguration
-public class UserServiceTest extends AbstractTestNGSpringContextTests{
-    private UserService userService;
+@ContextConfiguration("classpath*:/smart-context.xml")
+public class UserServiceTest extends AbstractTransactionalTestNGSpringContextTests{
 
     @Autowired
-    public void setUserService(UserService userService){
-        this.userService = userService;
-    }
+    private UserService userService;
 
     @Test
     public void hasMatchUser(){
